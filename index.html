@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>审小助｜小微企业财税健康诊断助手</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:#f5f7fb;color:#1f2937}
+.header{height:68px;background:#fff;border-bottom:1px solid #e8edf3;display:flex;align-items:center;justify-content:space-between;padding:0 7%;position:sticky;top:0;z-index:10}
+.logo{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:700}
+.logo-icon{width:38px;height:38px;border-radius:11px;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center}
+.header-right{color:#64748b;font-size:14px}
+.container{width:min(1100px,92%);margin:0 auto}
+.hero{padding:50px 0 35px;text-align:center}
+.hero h1{font-size:38px;margin-bottom:12px}.hero p{color:#64748b;font-size:16px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px}
+.feature-card{background:#fff;border-radius:18px;padding:26px;border:1px solid #e8edf3;cursor:pointer;transition:.2s}
+.feature-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.07)}
+.feature-icon{font-size:30px;margin-bottom:15px}.feature-card h3{margin-bottom:8px}.feature-card p{color:#64748b;font-size:14px;line-height:1.6}
+.chat-box{background:#fff;border-radius:20px;border:1px solid #e8edf3;overflow:hidden;margin-bottom:30px}
+.chat-header{padding:18px 22px;border-bottom:1px solid #edf0f4;font-weight:700}
+.chat-body{padding:22px;min-height:250px;max-height:430px;overflow-y:auto}
+.message{display:flex;margin-bottom:16px}.message.ai{justify-content:flex-start}.message.user{justify-content:flex-end}
+.bubble{max-width:75%;padding:13px 16px;border-radius:15px;line-height:1.6;font-size:14px}
+.ai .bubble{background:#f1f5f9}.user .bubble{background:#2563eb;color:#fff}
+.chat-input{border-top:1px solid #edf0f4;padding:15px;display:flex;gap:10px}
+.chat-input input{flex:1;border:1px solid #dbe2ea;border-radius:12px;padding:13px;outline:none}
+.btn{border:none;border-radius:11px;padding:11px 18px;cursor:pointer;font-weight:600}.btn-primary{background:#2563eb;color:#fff}.btn-light{background:#eef4ff;color:#2563eb}
+.quick-actions{display:flex;gap:10px;flex-wrap:wrap;padding:0 15px 15px}
+.quick-btn{border:1px solid #dbe5f1;background:#fff;padding:10px 15px;border-radius:10px;cursor:pointer}
+.modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:100;padding:20px;overflow-y:auto}
+.modal-content{width:min(650px,100%);background:#fff;margin:40px auto;border-radius:20px;padding:28px}
+.modal-title{font-size:22px;font-weight:700;margin-bottom:20px}
+.form-group{margin-bottom:16px}.form-group label{display:block;margin-bottom:7px;font-size:14px;font-weight:600}
+.form-group input,.form-group select{width:100%;padding:12px;border:1px solid #dbe2ea;border-radius:10px;background:#fff}
+.form-actions{display:flex;gap:10px;margin-top:20px}
+.score-box{text-align:center;padding:25px;background:#f8fafc;border-radius:16px;margin-bottom:20px}
+.score{font-size:58px;font-weight:800;color:#16a34a}.score-text{color:#16a34a;font-weight:700}
+.report-section{margin-top:20px}.report-section h3{margin-bottom:12px}
+.report-item{padding:13px;background:#f8fafc;border-radius:10px;margin-bottom:8px}
+.red{border-left:4px solid #ef4444}.green{border-left:4px solid #22c55e}
+.policy-card{padding:16px;border:1px solid #e2e8f0;border-radius:13px;margin-bottom:10px}
+.policy-card h4{margin-bottom:7px}.policy-card p{font-size:14px;color:#64748b;line-height:1.6}
+.footer{text-align:center;padding:35px;color:#94a3b8;font-size:13px}
+@media(max-width:700px){
+.header{padding:0 18px}.header-right{display:none}.hero{padding:35px 0 25px}.hero h1{font-size:30px}
+.features{grid-template-columns:1fr}.chat-input{flex-direction:column}.chat-input button{width:100%}.bubble{max-width:88%}
+}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="logo"><div class="logo-icon">审</div><span>审小助</span></div>
+<div class="header-right">小微企业财税健康诊断助手</div>
+</header>
+
+<main class="container">
+<section class="hero">
+<h1>让财税管理更简单</h1>
+<p>面向小微企业和个体工商户的智能财税健康诊断助手</p>
+</section>
+
+<section class="features">
+<div class="feature-card" onclick="openRisk()">
+<div class="feature-icon">🔍</div><h3>测测我的风险</h3>
+<p>填写简单的企业信息，快速进行财税风险自测。</p>
+</div>
+<div class="feature-card" onclick="openPolicy()">
+<div class="feature-icon">💰</div><h3>查税收优惠</h3>
+<p>根据企业情况匹配可能适用的税费优惠政策。</p>
+</div>
+<div class="feature-card" onclick="openRisk()">
+<div class="feature-icon">📋</div><h3>生成体检报告</h3>
+<p>自动生成财税健康红黑榜诊断报告。</p>
+</div>
+</section>
+
+<section class="chat-box">
+<div class="chat-header">🤖 审小助</div>
+<div class="chat-body" id="chatBody">
+<div class="message ai"><div class="bubble">你好，我是审小助 👋<br>我可以帮你进行财税风险自测、查询税收优惠，以及生成财税健康报告。</div></div>
+</div>
+<div class="quick-actions">
+<button class="quick-btn" onclick="quickAsk('测测我的风险')">🔍 测测我的风险</button>
+<button class="quick-btn" onclick="quickAsk('查税收优惠')">💰 查税收优惠</button>
+<button class="quick-btn" onclick="quickAsk('生成体检报告')">📋 生成体检报告</button>
+</div>
+<div class="chat-input">
+<input id="question" placeholder="例如：我是小规模纳税人，有哪些优惠？" onkeydown="if(event.key==='Enter')sendMessage()">
+<button class="btn btn-primary" onclick="sendMessage()">发送</button>
+</div>
+</section>
+
+<section id="policySection" style="display:none;margin-bottom:30px">
+<div class="chat-box">
+<div class="chat-header">💰 常见税费优惠</div>
+<div style="padding:22px">
+<div class="policy-card"><h4>增值税小规模纳税人月销售额10万元以下</h4><p>对符合条件的增值税小规模纳税人，月销售额10万元以下（含本数）的，可享受增值税免征政策。</p></div>
+<div class="policy-card"><h4>小规模纳税人3%征收率减按1%</h4><p>对符合条件的增值税小规模纳税人，适用3%征收率的应税销售收入，可按规定减按1%征收率征收增值税。</p></div>
+<div class="policy-card"><h4>“六税两费”减半</h4><p>符合条件的增值税小规模纳税人、小型微利企业和个体工商户，可按规定享受相关税费减半优惠。</p></div>
+<div class="policy-card"><h4>小型微利企业所得税优惠</h4><p>符合条件的小型微利企业，可按政策规定享受企业所得税优惠。</p></div>
+</div></div></section>
+</main>
+
+<footer class="footer">
+审小助 · 小微企业财税健康诊断助手<br><br>
+本工具提供智能辅助分析，具体政策适用情况以最新有效政策及主管部门确认结果为准。
+</footer>
+
+<div class="modal" id="riskModal">
+<div class="modal-content">
+<div class="modal-title">🔍 财税健康自测</div>
+<div class="form-group"><label>企业类型</label><select id="companyType"><option>小微企业</option><option>个体工商户</option></select></div>
+<div class="form-group"><label>月销售额（元）</label><input id="sales" type="number" placeholder="例如：80000"></div>
+<div class="form-group"><label>从业人数</label><input id="employees" type="number" placeholder="例如：10"></div>
+<div class="form-group"><label>是否按期进行纳税申报</label><select id="taxDeclare"><option value="yes">是</option><option value="no">否</option></select></div>
+<div class="form-actions"><button class="btn btn-light" onclick="closeRisk()">取消</button><button class="btn btn-primary" onclick="generateReport()">开始体检</button></div>
+</div></div>
+
+<div class="modal" id="reportModal">
+<div class="modal-content">
+<div class="modal-title">📋 财税健康红黑榜</div>
+<div class="score-box"><div class="score" id="score">82</div><div class="score-text">财税健康度：良好</div></div>
+<div class="report-section"><h3>🟢 财税健康“红榜”</h3><div id="redList"><div class="report-item green">✓ 当前未发现明显异常申报风险</div><div class="report-item green">✓ 建议持续关注可享受的税费优惠</div></div></div>
+<div class="report-section"><h3>🔴 财税风险“黑榜”</h3><div id="blackList"></div></div>
+<div class="report-section"><h3>💰 可能适用的优惠</h3><div id="matchedPolicies"></div></div>
+<div class="form-actions"><button class="btn btn-light" onclick="closeReport()">返回</button><button class="btn btn-primary" onclick="window.print()">🖨 打印 / 保存报告</button></div>
+</div></div>
+
+<script>
+function sendMessage(){
+const input=document.getElementById("question"),question=input.value.trim();if(!question)return;
+addMessage(question,"user");input.value="";
+setTimeout(()=>{
+let answer="这个问题可以从企业类型、销售额、纳税方式等方面进行判断。建议点击“测测我的风险”，填写基本信息后，我可以进一步帮你分析。";
+if(question.includes("优惠")||question.includes("减税")||question.includes("免税"))answer="如果你是增值税小规模纳税人，可以先看看月销售额是否不超过10万元；符合条件的情况下，可能适用相关增值税优惠。你也可以点击“查税收优惠”查看常见政策。";
+if(question.includes("风险")||question.includes("体检"))answer="可以。点击“测测我的风险”，填写企业类型、销售额、从业人数等基本信息，我会生成一份财税健康诊断结果。";
+addMessage(answer,"ai");
+},500);
+}
+function addMessage(text,type){
+const body=document.getElementById("chatBody"),message=document.createElement("div"),bubble=document.createElement("div");
+message.className="message "+type;bubble.className="bubble";bubble.innerText=text;message.appendChild(bubble);body.appendChild(message);body.scrollTop=body.scrollHeight;
+}
+function quickAsk(text){
+addMessage(text,"user");
+if(text==="测测我的风险"){setTimeout(()=>{addMessage("好的，请填写企业基本信息，我将为你生成财税健康诊断。","ai");openRisk()},400)}
+if(text==="查税收优惠"){document.getElementById("policySection").style.display="block";document.getElementById("policySection").scrollIntoView({behavior:"smooth"});setTimeout(()=>addMessage("我已经为你打开常见税费优惠。正式版本还可以根据你的企业信息自动匹配政策。","ai"),400)}
+if(text==="生成体检报告")openRisk();
+}
+function openRisk(){document.getElementById("riskModal").style.display="block"}
+function closeRisk(){document.getElementById("riskModal").style.display="none"}
+function openPolicy(){document.getElementById("policySection").style.display="block";document.getElementById("policySection").scrollIntoView({behavior:"smooth"})}
+function generateReport(){
+const type=document.getElementById("companyType").value,sales=Number(document.getElementById("sales").value||0),employees=Number(document.getElementById("employees").value||0),taxDeclare=document.getElementById("taxDeclare").value;
+let score=82;if(sales>100000)score-=8;if(employees>300)score-=8;if(taxDeclare==="no")score-=20;if(score<0)score=0;
+document.getElementById("score").innerText=score;
+const blackList=document.getElementById("blackList");blackList.innerHTML="";
+if(sales>100000)blackList.innerHTML+=`<div class="report-item red">⚠️ 当前填写的月销售额超过10万元，建议进一步核实适用的增值税政策。</div>`;
+else blackList.innerHTML+=`<div class="report-item red">⚠️ 建议进一步核实企业具体税种、纳税方式及优惠适用条件。</div>`;
+if(taxDeclare==="no")blackList.innerHTML+=`<div class="report-item red">⚠️ 你填写的信息显示可能存在未按期申报情况，建议及时核实。</div>`;
+const matched=document.getElementById("matchedPolicies");matched.innerHTML="";
+if(sales<=100000)matched.innerHTML+=`<div class="policy-card"><h4>💰 小规模纳税人月销售额10万元以下优惠</h4><p>你的填写信息可能符合该政策的销售额条件，但仍需结合纳税人身份、纳税期限等条件进一步判断。</p></div>`;
+if(type==="小微企业")matched.innerHTML+=`<div class="policy-card"><h4>💰 小型微利企业相关所得税优惠</h4><p>如符合国家非限制和禁止行业、应纳税所得额、从业人数及资产总额等条件，可能适用相关企业所得税优惠。</p></div>`;
+if(!matched.innerHTML)matched.innerHTML=`<div class="policy-card">暂未根据当前信息匹配到明显优惠，建议补充更多企业信息后再次诊断。</div>`;
+closeRisk();document.getElementById("reportModal").style.display="block";
+}
+function closeReport(){document.getElementById("reportModal").style.display="none"}
+</script>
+</body>
+</html>
